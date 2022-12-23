@@ -20,6 +20,10 @@ async function getTask() {
 
 function renderTasks(data) {
   main.innerHTML = '';
+  main.innerHTML += `      
+  <div class="mb-5">
+    <a href="./post.html" class="btn btn-primary">Crear</a>
+  </div>`
   data.forEach((task) => {
     let fechaCr = new Date(task.created_at).getTime();
     let fecheHoy = new Date().getTime();
@@ -48,6 +52,7 @@ function renderTasks(data) {
   });
 }
 function renderTodo(data){
+  const id = new URLSearchParams(window.location.search).get("id");
   body.innerHTML = `<div class="col-4">
   <div class="card">
     <div class="card-body">
@@ -59,9 +64,9 @@ function renderTodo(data){
         ${data.body}
       </p>
       <p class="card-text"><small class="text-muted">Fecha de creación: ${data.created_at}</small></p>
-      <a href="/" class="btn btn-primary">Regresar</a>
-      <a href="#" class="btn btn-primary">Editar</a>
-      <a href="#" class="btn btn-danger">Eliminar</a>
+      <a href="./index.html" class="btn btn-primary">Regresar</a>
+      <a href="./edit.html?id=${id}" class="btn btn-primary">Editar</a>
+      <button onclick="deleteTodo()" class="btn btn-danger">Eliminar</button>
     </div>
   </div>
 </div>`
